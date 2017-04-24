@@ -1,0 +1,14 @@
+.foot
+
+script(type="text/javascript").
+	$('.ui.dropdown').dropdown();
+	$('.post-content .avatar').popup({
+		inline: true,
+		position: 'bottom right',
+		lastResort: 'bottom right',
+	});
+	$(".ui.left.sidebar").css('background-image', 'url(/images/WallPaper.jpg)')
+	$("#push").click(() => {
+		$(".ui.left.sidebar")
+			.sidebar('toggle')
+	})	

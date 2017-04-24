@@ -1,0 +1,33 @@
+.post-content
+  .ui.grid
+    .four.wide.column
+      a.avatar(href="/posts?author=#{post.author._id}"
+               data-title="#{post.author.name} | #{ ({m: '男', f: '女', x: '保密'})[post.author.gender] }"
+               data-content="#{post.author.bio}")
+        img.avatar(src="/images/#{post.author.avatar}")
+    .eight.wide.column
+      .ui.segment(data-tooltip="hello?")
+        h3
+          a(href="/posts/#{post._id}") #{post.title}
+          !{post.content}
+          //- code above represent loading the html doc;
+        div
+          span.tag #{post.created_at}
+          span.tag.right
+            span 浏览 (#{post.pv})
+            -if(!post.commentCounts) {
+            span 评论 (0) 
+            -} else {
+              span 评论 (#{post.commentCounts})
+            -} 
+
+          -if (user && post.author._id && user._id.toString() === post.author._id.toString()) {
+            .ui.inline.dropdown
+              .text
+              i.dropdown.icon
+              .menu
+                .item
+                  a(href="/posts/#{post._id}/edit") edit
+                .item
+                  a(href="/posts/#{post._id}/remove") remove
+          -}

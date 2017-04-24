@@ -1,0 +1,88 @@
+include header
+
+.ui.grid
+	.five.wide.column
+	.six.wide.column
+		form#signupForm.ui.form.segment(method="post" enctype="multipart/form-data")
+			.field.required
+				lable 用户名
+				.ui.left.icon.input
+					i.icon.user
+					input(placeholder="用户名" type="text" name="name")
+			.field.required
+				lable 密码
+				input(placeholder="密码" type="password" name="password")
+			.field.required
+				lable 重复密码
+				input(placeholder="重复密码" type="password" name="repassword")
+			.field.required
+				lable 性别
+				select.ui.compact.selection.dropdown(name="gender")
+					option(value="m") 男
+					option(value="f") 女
+					option(value="x") 保密
+			.field.required
+				lable.block 头像
+				input.ui(type="file" name="avatar" accept="image/gif, image/jpeg, image/png")
+			.field.required
+				lable 个人简介
+				textarea(name="bio" rows="5" v-model="user.bio")
+			input.ui.button.fluid(type="submit" value="注册")
+			.ui.error.message
+
+script.
+	$('#signupForm')
+	.form({
+	on: 'blur',
+	fields: {
+		name: {
+			identifier: 'name',  // binding to the element;
+			rules: [{
+				type: 'empty',
+				prompt: 'please enter your name'
+			},
+			{
+				type: 'maxLength[10]',
+				prompt: '用户名请不要超过10个字符'
+			}]
+		},
+		password: {
+			identifier: 'password',
+			rules: [{
+				type: 'empty',
+				prompt: 'Please enter the password'
+			}]
+		},
+		repassword: {
+			identifier: 'repassword',
+			rules: [{
+				type: 'empty',
+				prompt: 'Please repeat the password'
+			},
+			{
+				type: 'match[password]',
+				prompt: "The password you repeat doesn't match"  
+			}]
+		},
+		avatar: {
+			identifier: 'avatar',
+			rules: [{
+				type: 'empty',
+				prompt: 'Please choose a picture as ur avatar'
+			}]
+		},
+		bio: {
+			identifier: 'bio',
+			rules: [{
+				type:'empty',
+				prompt: '请输入个人简介'
+			},
+			{
+				type: 'maxLength[30]',
+				prompt: '个人简介限制在30个字符'
+			}]
+		}
+	}
+	});
+
+include footer

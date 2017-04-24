@@ -1,0 +1,20 @@
+include header
+
+.ui.grid
+  .four.wide.column
+    a.avatar(href="/posts?author=#{user._id}"
+             data-title="#{user.name} | #{({m: '男', f: '女', x: '保密'})[user.gender]}"
+             data-content="#{user.bio}")
+      img.avatar(src="/images/#{user.avatar}")
+
+  .eight.wide.column
+    form.ui.form.segment.piled(method="post" action="/posts")
+      .field.required
+        lable Title
+        input(type="text" name="title")
+      .field.required
+        lable Content
+        textarea(name='content' rows="15")
+      input.ui.button(type="submit" value="submit")
+
+include footer

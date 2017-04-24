@@ -1,0 +1,20 @@
+.ui.left.sidebar.inverted.vertical.menu
+	if user
+		span.item.green
+			h2 Welcome
+			span #{user.name}
+		br
+		a.item(href="/posts") 首页
+		br
+		a.item(href="/posts?author=#{user._id}") 个人主页
+		a.item(href="/posts/create") 发表文章
+		br
+		a.item(href="/signout") 登出
+	else 
+		span.item.green
+			h2 Welcome
+		br
+		a.item(href="/signup") 注册
+		a.item(href="/signin") 登陆
+		br
+		a.item(href="/posts") 随便逛逛
